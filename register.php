@@ -3,10 +3,7 @@
 <?php include('includes/header.php'); ?>
 
 <main class="container p-4">
-  <div class="row">
-    <a href="register.php">Registrate </a>
-    <a href="login.php">Inicia sesión</a>
-  </div>
+    <h1 class="m-4 p-4">Registrate</h1>
 </main>
 
 <?php include('includes/footer.php'); ?>
