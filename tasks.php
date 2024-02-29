@@ -1,4 +1,7 @@
-<?php include("db.php"); ?>
+<?php
+include("db.php");
+session_start();
+?>
 
 <?php include('includes/header.php'); ?>
 
@@ -45,7 +48,7 @@
 
                     <?php
                     $query = "SELECT * FROM task";
-                    $result_tasks = mysqli_query($conn, $query);
+                    $result_tasks = mysqli_query($conn2, $query);
 
                     while ($row = mysqli_fetch_assoc($result_tasks)) { ?>
                         <tr>

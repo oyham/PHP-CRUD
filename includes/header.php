@@ -17,6 +17,7 @@
 
   <nav class="navbar navbar-dark bg-dark container-fluid">
     <div class="container">
-      <a class="navbar-brand" href="index.php">PHP MySQL CRUD</a>
+      <!-- <a class="navbar-brand" href="index.php">PHP MySQL CRUD</a> -->
+      <title class="navbar-brand">PHP MySQL CRUD</title>
     </div>
   </nav>

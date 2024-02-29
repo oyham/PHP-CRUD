@@ -1,10 +1,21 @@
 <?php
-session_start();
+// session_start();
 
-$conn = mysqli_connect(
+$server = 'localhost:3306';
+$username = 'root';
+$password = '';
+$database = 'taskusers';
+// $conn2 = mysqli_connect();
+
+$conn2 = mysqli_connect(
   'localhost',
   'root',
   '',
-  'php_mysql_crud'
+  'taskusers'
 ) or die(mysqli_erro($mysqli));
 
+try {
+  $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
+} catch (PDOException $e) {
+  die('Connection Failed: ' . $e->getMessage());
+}
