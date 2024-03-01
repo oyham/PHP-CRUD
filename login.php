@@ -1,12 +1,12 @@
 <?php
 
-include("db.php");
-
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-    header('Location: /tasks.php');
+    header('Location: /taskusers/tasks.php');
+    exit;
 }
+include("db.php");
 
 
 if (!empty($_POST['email']) && !empty($_POST['password'])) {
@@ -17,9 +17,9 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
     $message = '';
 
-    if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
+    if ($results !== false && count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
         $_SESSION['user_id'] = $results['id'];
-        header("Location: /tasks");
+        header("Location: /taskusers/tasks.php");
     } else {
         $message = 'Sorry, those credentials do not match';
     }

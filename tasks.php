@@ -74,6 +74,7 @@ session_start();
                 </tbody>
             </table>
         </div>
+        <a href='logout.php'>Logout</a>
     </div>
 </main>
 <?php include('includes/footer.php'); ?>
