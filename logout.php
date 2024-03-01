@@ -5,6 +5,5 @@ session_unset();
 
 session_destroy();
 
-// header('Location: /taskusers');
 header('Location: /taskusers/index.php');
 
