@@ -5,7 +5,7 @@ $server = 'localhost:3306';
 $username = 'root';
 $password = '';
 $database = 'taskusers';
-// $conn2 = mysqli_connect();
+// $conn = mysqli_connect();
 
 $conn2 = mysqli_connect(
   'localhost',
