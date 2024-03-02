@@ -1,18 +1,16 @@
 <?php
-// session_start();
 
 $server = 'localhost:3306';
 $username = 'root';
 $password = '';
 $database = 'taskusers';
-// $conn = mysqli_connect();
 
 $conn2 = mysqli_connect(
   'localhost',
   'root',
   '',
   'taskusers'
-) or die(mysqli_erro($mysqli));
+) or die(mysqli_error($mysqli));
 
 try {
   $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);

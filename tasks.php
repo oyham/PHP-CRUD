@@ -80,7 +80,7 @@ session_start();
                 </tbody>
             </table>
         </div>
-        <a href='logout.php'>Logout</a>
+        <a href='logout.php' class="btn btn-primary m-4 p-2">Cerrar Sesión</a>
     </div>
 </main>
 <?php include('includes/footer.php'); ?>

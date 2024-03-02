@@ -19,16 +19,15 @@ if (isset($_SESSION['user_id'])) {
 
 <?php include('includes/header.php'); ?>
 <main class="container p-4">
-  <div class="row">
-    <?php if (!empty($user)): ?>
-      <br>Welcome.
-      <?= $user['email'] ?>
-      <br>You are succesfully logged In
-      <a href='logout.php'>Logout</a>
-    <?php else: ?>
-      <h1>Please Login or SignUp</h1>
-      <a href="register.php">Registrate </a>
-      <a href="login.php">Inicia sesión</a>
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <?php if (!empty($user)):
+      header('Location: /taskusers/tasks.php');
+    else: ?>
+      <h1>Registrate o Inicia sesión</h1>
+      <div>
+        <a href="register.php" class="btn btn-outline-primary">Registrate</a>
+        <a href="login.php" class="btn btn-primary">Inicia sesión</a>
+      </div>
     <?php endif; ?>
   </div>
 </main>
