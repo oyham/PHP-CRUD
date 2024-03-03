@@ -1,13 +1,12 @@
 <?php
 
+include("db.php");
 session_start();
 
 if (isset($_SESSION['user_id'])) {
     header('Location: /taskusers/tasks.php');
     exit;
 }
-include("db.php");
-
 
 if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $records = $conn->prepare('SELECT id, email, password FROM users WHERE email = :email');
@@ -30,7 +29,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 <?php include('includes/header.php'); ?>
 <main class="grid text-center p-4">
     <?php if (!empty($message)): ?>
-        <p class="p-3 text-bg-warning rounded-3">
+        <p id="message" class="p-3 text-bg-warning rounded-3">
             <?= $message ?>
         </p>
     <?php endif; ?>
@@ -39,13 +38,13 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Dirección de correo</label>
             <input name="email" type="email" class="form-control rounded-3" id="exampleInputEmail1"
-                aria-describedby="emailHelp" placeholder="Inserte su email">
+                aria-describedby="emailHelp" placeholder="Inserte su email" required>
             <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie.</div>
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
             <input name="password" type="password" class="form-control" id="exampleInputPassword1"
-                placeholder="introduzca su contraseña">
+                placeholder="introduzca su contraseña" required>
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">

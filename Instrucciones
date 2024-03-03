@@ -5,6 +5,10 @@
 -Poseer una version Actualizada de cualquier navegador WED(Chorme,Morzilla Firefox,Edge)
 -Debe Instalar Xampp en el Ordenado y Ubicar el Repositorio o Carpeta en la carpeta htdocs.
 -Debe Instalar Instalar Mysql en el sistema operativo de preferencia.
+-Crea taskusers en phpmyadmin
+-Crea task y users como hijos de taskusers
+-Crea la estructura de users con id, email, y password.
+-Crea la estructura de task con id, title, description, created_at y user_id.
 \*Ejecucion:
 -Iniciar el servidor Wed Xampp.
 -Acceder a la siguiente Ruta:http://localhost/taskusers/

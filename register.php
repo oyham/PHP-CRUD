@@ -11,9 +11,9 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $stmt->bindParam(':password', $password);
 
     if ($stmt->execute()) {
-        $message = 'Successfully created new user';
+        $message = '¡Usuario creado!';
     } else {
-        $message = 'Sorry there must have been an issue creating your account';
+        $message = 'Perdón, huno un problema al crear tu cuenta.';
     }
 }
 ?>
@@ -22,7 +22,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 <?php include('includes/header.php'); ?>
 <main class="grid text-center p-4">
     <?php if (!empty($message)): ?>
-        <p>
+        <p id="message" class="p-3 text-bg-warning rounded-3">
             <?= $message ?>
         </p>
     <?php endif; ?>
@@ -30,18 +30,18 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     <form class="container-sm" action="register.php" method="POST">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Dirección de correo</label>
-            <input name="email" type="email" class="form-control rounded-3" id="exampleInputEmail1"
+            <input required name="email" type="email" class="form-control rounded-3" id="exampleInputEmail1"
                 aria-describedby="emailHelp" placeholder="Inserte su email">
             <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie.</div>
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input name="password" type="password" class="form-control" id="exampleInputPassword1"
+            <input required name="password" type="password" class="form-control" id="exampleInputPassword1"
                 placeholder="introduzca una contraseña">
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Repita la contraseña</label>
-            <input name="confirm_password" type="password" class="form-control" id="exampleInputPassword1"
+            <input required name="confirm_password" type="password" class="form-control" id="exampleInputPassword2"
                 placeholder="Repita la contraseña">
         </div>
         <div class="mb-3 form-check">

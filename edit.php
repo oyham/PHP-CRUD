@@ -1,6 +1,11 @@
 <?php
-session_start();
 include("db.php");
+session_start();
+if (!isset($_SESSION['user_id'])) {
+  echo "No has iniciado sesión.";
+  header('Location: /taskusers/index.php');
+  exit;
+}
 $title = '';
 $description = '';
 
@@ -22,7 +27,7 @@ if (isset($_POST['update'])) {
 
   $query = "UPDATE task set title = '$title', description = '$description' WHERE id=$id";
   mysqli_query($conn2, $query);
-  $_SESSION['message'] = 'Task Updated Successfully';
+  $_SESSION['message'] = '¡Tarea editada!';
   $_SESSION['message_type'] = 'warning';
   header('Location: tasks.php');
 }
@@ -36,13 +41,13 @@ if (isset($_POST['update'])) {
         <form action="edit.php?id=<?php echo $_GET['id']; ?>" method="POST">
           <div class="form-group">
             <input name="title" type="text" class="form-control" value="<?php echo $title; ?>"
-              placeholder="Update Title">
+              placeholder="Editar título">
           </div>
           <div class="form-group">
             <textarea name="description" class="form-control" cols="30" rows="10"><?php echo $description; ?></textarea>
           </div>
           <button class="btn-success" name="update">
-            Update
+            Editar
           </button>
         </form>
       </div>
