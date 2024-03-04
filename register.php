@@ -3,18 +3,46 @@
 include("db.php");
 $message = '';
 
-if (!empty($_POST['email']) && !empty($_POST['password'])) {
-    $sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':email', $_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $stmt->bindParam(':password', $password);
+if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password'];
 
-    if ($stmt->execute()) {
-        $message = '¡Usuario creado!';
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (strlen($password) >= 8 && preg_match('/^[a-zA-Z0-9]+$/', $password)) {
+            if ($password === $confirmPassword) {
+                $checkEmailSql = "SELECT COUNT(*) FROM users WHERE email = :email";
+                $checkEmailStmt = $conn->prepare($checkEmailSql);
+                $checkEmailStmt->bindParam(':email', $_POST['email']);
+                $checkEmailStmt->execute();
+                $emailExists = $checkEmailStmt->fetchColumn();
+
+                if ($emailExists) {
+                    $message = 'El email ya está registrado. Por favor, elige otro.';
+                } else {
+                    $sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':email', $_POST['email']);
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                    $stmt->bindParam(':password', $password);
+
+                    if ($stmt->execute()) {
+                        $message = '¡Usuario creado!';
+                    } else {
+                        $message = 'Perdón, huno un problema al crear tu cuenta.';
+                    }
+                }
+            } else {
+                $message = 'La contraseña y la confirmación de la contraseña no coinciden.';
+            }
+        } else {
+            $message = 'La contraseña debe tener al menos 8 caracteres alfanuméricos (mayúsculas y minúsculas).';
+        }
     } else {
-        $message = 'Perdón, huno un problema al crear tu cuenta.';
+        $message = 'Por favor, ingresa un correo electrónico válido.';
     }
+} else {
+    $message = 'Por favor, completa todos los campos.';
 }
 ?>
 
@@ -35,14 +63,14 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
             <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie.</div>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <label for="exampleInputPassword1" class="form-label">Contraseña (min 8 caracteres alfanuméricos)</label>
             <input required name="password" type="password" class="form-control" id="exampleInputPassword1"
-                placeholder="introduzca una contraseña">
+                placeholder="introduzca una contraseña" pattern="^[a-zA-Z0-9]+$" minlength="8">
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Repita la contraseña</label>
             <input required name="confirm_password" type="password" class="form-control" id="exampleInputPassword2"
-                placeholder="Repita la contraseña">
+                placeholder="Repita la contraseña" pattern="^[a-zA-Z0-9]+$" minlength="8">
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
