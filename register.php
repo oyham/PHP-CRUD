@@ -29,14 +29,14 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['conf
                     if ($stmt->execute()) {
                         $message = '¡Usuario creado!';
                     } else {
-                        $message = 'Perdón, huno un problema al crear tu cuenta.';
+                        $message = 'Hubo un problema al crear tu cuenta.';
                     }
                 }
             } else {
-                $message = 'La contraseña y la confirmación de la contraseña no coinciden.';
+                $message = 'Las contraseñas no coinciden.';
             }
         } else {
-            $message = 'La contraseña debe tener al menos 8 caracteres alfanuméricos (mayúsculas y minúsculas).';
+            $message = 'La contraseña debe tener al menos 8 caracteres alfanuméricos.';
         }
     } else {
         $message = 'Por favor, ingresa un correo electrónico válido.';
@@ -63,7 +63,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['conf
             <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie.</div>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Contraseña (min 8 caracteres alfanuméricos)</label>
+            <label for="exampleInputPassword1" class="form-label">Contraseña <br /> (min 8 caracteres
+                alfanuméricos)</label>
             <input required name="password" type="password" class="form-control" id="exampleInputPassword1"
                 placeholder="introduzca una contraseña" pattern="^[a-zA-Z0-9]+$" minlength="8">
         </div>

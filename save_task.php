@@ -9,9 +9,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 if (isset($_POST['save_task'])) {
-  $title = $_POST['title'];
-  $description = $_POST['description'];
-  $user_id = $_SESSION['user_id'];  // Suponiendo que has almacenado el id del usuario en la sesión durante el inicio de sesión.
+  $title = htmlspecialchars($_POST['title'], ENT_QUOTES, 'UTF-8');
+  $description = htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8');
+  $user_id = $_SESSION['user_id'];
+
+  $title = mysqli_real_escape_string($conn2, $title);
+  $description = mysqli_real_escape_string($conn2, $description);
 
   $query = "INSERT INTO task(title, description, user_id) VALUES ('$title', '$description', '$user_id')";
   $result = mysqli_query($conn2, $query);
